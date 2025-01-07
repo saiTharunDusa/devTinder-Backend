@@ -1,0 +1,20 @@
+{
+  "name": "devtinder-backend",
+  "version": "1.0.0",
+  "description": "Just like tinder, dev tinder is the place where developers can connect with each other.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "author": "Sai Tharun Dusa",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.4",
+    "validator": "^13.12.0"
+  }
+}
