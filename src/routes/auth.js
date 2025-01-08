@@ -20,7 +20,7 @@ authRouter.post("/signUp", async (req, res)=>{
         });
 
         await user.save();
-        res.send("User added successfully!")
+        res.json({message : "User added successfully!"})
     } catch(err)
     {
         res.status(404).send("User failed to add" + err.message);
@@ -48,7 +48,7 @@ authRouter.post("/login", async(req, res)=>{
             res.cookie("token", token, {
                 expires: new Date(Date.now() + 8 * 3600000),
             });
-            res.send("Login Successful!!");
+            res.json({message : "Login Successful!!"});
         }
     }
     catch(err)
@@ -61,7 +61,7 @@ authRouter.post("/login", async(req, res)=>{
 authRouter.post("/logout", async (req, res) => {
     res.cookie("token", null, {
         expires: new Date(Date.now())
-    }).send("Logout Succesfull!")
+    }).json({message : "Logout Succesfull!"})
 })
 
 module.exports = authRouter;

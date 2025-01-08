@@ -12,7 +12,7 @@ profileRouter.get("/profile/view", userAuth, async(req, res)=>{
     try{
         const user = req.user;
         console.log(user);
-        res.send(user);
+        res.json({data: user});
 
     }catch(err)
     {
@@ -52,7 +52,7 @@ profileRouter.patch("/profile/forgotpassword", userAuth, async(req, res)=>{
         const passwordHash = await bcrypt.hash(password, 10);
         loggedInUser.password = passwordHash;
         await loggedInUser.save();
-        res.send("Password has been updated successfully!!!");
+        res.json({message : "Password has been updated successfully!!!"});
     }catch(err)
     {
         res.status(400).send("Error Message : " + err.message);
