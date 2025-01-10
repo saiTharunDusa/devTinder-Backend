@@ -7,7 +7,7 @@ const { default: mongoose } = require('mongoose');
 
 const requestRouter = express.Router();
 
-requestRouter.post("/request/send/:status/:userId", userAuth, async (req, res) =>{
+requestRouter.post("/send/request/:status/:userId", userAuth, async (req, res) =>{
     try{
         const fromUser = req.user;
         const fromUserId = req.user._id;
@@ -79,7 +79,7 @@ requestRouter.post("/request/send/:status/:userId", userAuth, async (req, res) =
 });
 
 
-requestRouter.post("/request/review/:status/:requestId", userAuth, async (req, res) => {
+requestRouter.post("/review/request/:status/:requestId", userAuth, async (req, res) => {
     try{
         // tharun => charan
         // validate the status
