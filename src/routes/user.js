@@ -42,7 +42,12 @@ userRouter.get("/user/connections", userAuth, async(req, res)=>{
             ]
         }).populate("fromUserId", USER_SAFE_DATA).populate("toUserId", USER_SAFE_DATA);
 
+        console.log(connectionRequest);
 
+        if(connectionRequest.length <= 0)
+        {
+            res.json({message : "No connections", data : data});
+        }
         
         // Now we have populated data in connectionRequest.
         // each object in connectionRequest contains "fromUserId" and "toUserId".
@@ -50,11 +55,14 @@ userRouter.get("/user/connections", userAuth, async(req, res)=>{
         // if fromUserId is charan, then return toUserId. If toUserId is charan, then return fromUserId.
         // because we need connections of charan. But we should not display the Charan data in the connections page.
         const data = connectionRequest.map((row) => {
-            if(row.fromUserId._id.toString() === loggedInUser._id.toString())
+            if(row.fromUserId && row.toUserId)
             {
-                return row.toUserId;
+                if(row.fromUserId._id.toString() === loggedInUser._id.toString())
+                {
+                    return row.toUserId;
+                }
+                return row.fromUserId;
             }
-            return row.fromUserId;
         })
 
         res.json({message: "Data fetched succesfully!", data : data});
