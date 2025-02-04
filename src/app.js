@@ -5,6 +5,9 @@ const cors = require('cors');
 
 const app = express();
 
+
+require("dotenv").config();
+
 app.use(
     cors({
       origin: "http://localhost:5173",
@@ -31,8 +34,8 @@ app.use("/", userRouter);
 connectDB()
     .then(() => {
         console.log("Database connection is successful");
-        app.listen(3000, () => {
-            console.log("Server is listening on port 3000!");
+        app.listen(process.env.PORT, () => {
+            console.log("Server is listening on port " + process.env.PORT);
         });
     })
     .catch(err => {
