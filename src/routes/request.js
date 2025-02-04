@@ -3,6 +3,7 @@ const { userAuth } = require("../middlewares/auth");
 const {User} = require("../models/User");
 const { connectionRequestModel} = require("../models/connectionRequest");
 const { default: mongoose } = require('mongoose');
+const sendEmail = require("../utils/sendEmail");
 
 
 const requestRouter = express.Router();
@@ -66,6 +67,12 @@ requestRouter.post("/send/request/:status/:userId", userAuth, async (req, res) =
         });
 
         const data = await conRequest.save();
+        const emailRes = await sendEmail.run(
+            "A new friend request from " + req.user.firstName,
+            req.user.firstName + " is " + status + " in " + toUser.firstName
+          );
+          console.log(emailRes);
+    
         res.json({
             message: "Connection request status from " + fromUser.firstName + " to " + toUser.firstName + " is" + status,
             data
