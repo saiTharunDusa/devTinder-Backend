@@ -42,7 +42,6 @@ userRouter.get("/user/connections", userAuth, async(req, res)=>{
             ]
         }).populate("fromUserId", USER_SAFE_DATA).populate("toUserId", USER_SAFE_DATA);
 
-        console.log(connectionRequest);
 
         if(connectionRequest.length <= 0)
         {

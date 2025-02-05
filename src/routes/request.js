@@ -71,7 +71,6 @@ requestRouter.post("/send/request/:status/:userId", userAuth, async (req, res) =
             "A new friend request from " + req.user.firstName,
             req.user.firstName + " is " + status + " in " + toUser.firstName
           );
-          console.log(emailRes);
     
         res.json({
             message: "Connection request status from " + fromUser.firstName + " to " + toUser.firstName + " is" + status,
